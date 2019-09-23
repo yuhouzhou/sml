@@ -8,12 +8,12 @@ def pv(irr, c, m, n, d=0, f = 1):
     :param irr: yield to maturity
     :param c: annual coupon rate
     :param m: number of payments per year
-    :param n: number of years
+    :param n: time to maturity
     :param d: discount rate
     :param f: par value
     :return: present value or price
     """
-    # coupon
+    # coupon payment
     C = f * c / m
     # period
     i = np.arange(1, (m * n) + 1)
