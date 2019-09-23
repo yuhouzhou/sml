@@ -4,7 +4,7 @@ from sys import exit
 from timeit import Timer
 
 
-def my_bisect(f, x0, x1, tol=1e-12, maxiter=100):
+def my_bisect(f, x0, x1, tol=1e-12, maxiter=50):
     """
 
     :param f: python function return a number
