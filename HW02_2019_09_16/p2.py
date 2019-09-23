@@ -2,14 +2,14 @@ import numpy as np
 from scipy.optimize import brentq
 
 
-def pv(irr, c, d, m, n, f = 1):
+def pv(irr, c, m, n, d=0, f = 1):
     """
 
     :param irr: yield to maturity
     :param c: annual coupon rate
-    :param d: discount rate
     :param m: number of payments per year
     :param n: number of years
+    :param d: discount rate
     :param f: par value
     :return: present value or price
     """
@@ -27,6 +27,6 @@ if __name__ == '__main__':
     n = 10
     d = 0.75
 
-    irr = brentq(pv, 0, 1, args=(c, d, m, n))
+    irr = brentq(pv, 0, 1, args=(c, m, n, d))
 
     print("yield to maturity = {:.4f}%".format(irr*100))
