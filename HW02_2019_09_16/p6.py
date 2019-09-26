@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     period = np.arange(1, m * n + 1)
 
-    r_lst_dict = {'r: 6% - 8%': np.linspace(0.06, r, n * m),
+    r_lst_dict = {'r: 6% - 8%': np.linspace(r, 0.06,  n * m),
                  'r: 8% - 8%' : np.linspace(r, r, n * m),
                  'r: 8% - 10%' : np.linspace(r, 0.1, n * m)}
 
