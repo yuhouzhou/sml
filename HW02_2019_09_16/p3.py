@@ -12,11 +12,11 @@ if __name__ == "__main__":
     for c in c_lst:
         price_lst = [pv(irr=r, c=c, m=m, n=year, f=f) for year in years]
         plt.plot(years, price_lst, label='c $= {:.0f}\%$'.format(c * 100))
-        plt.xlabel("Time to Maturity")
-        plt.ylabel("Price")
-        plt.title("Price vs. Time to Maturity for Level Coupon Bonds")
-        plt.legend()
 
+    plt.xlabel("Time to Maturity")
+    plt.ylabel("Price")
+    plt.title("Price vs. Time to Maturity for Level Coupon Bonds")
+    plt.legend()
     plt.tight_layout()
     plt.savefig('p3.pdf')
     plt.show()

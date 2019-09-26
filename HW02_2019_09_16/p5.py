@@ -34,11 +34,11 @@ if __name__ == "__main__":
     for c in c_lst:
         volat_lst = [volatility(c=c, y=r, n=year, m=m, f=f) for year in years]
         plt.plot(years, volat_lst, label='c $= {:.0f}\%$'.format(c * 100))
-        plt.xlabel("Time to Maturity (years)")
-        plt.ylabel("Volatility")
-        plt.title("Volatility vs. Time to Maturity for Level Coupon Bonds")
-        plt.legend()
 
+    plt.xlabel("Time to Maturity (years)")
+    plt.ylabel("Volatility")
+    plt.title("Volatility vs. Time to Maturity for Level Coupon Bonds")
+    plt.legend()
     plt.tight_layout()
     plt.savefig('p5.pdf')
     plt.show()
