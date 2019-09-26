@@ -36,7 +36,6 @@ if __name__ == "__main__":
         plt.plot(years, volat_lst, label='c $= {:.0f}\%$'.format(c * 100))
         plt.xlabel("Time to Maturity (years)")
         plt.ylabel("Volatility")
-        # plt.yscale("log")
         plt.title("Volatility vs. Time to Maturity for Level Coupon Bonds")
         plt.legend()
 

@@ -91,6 +91,8 @@ def my_brent(f, x0, x1, tol=1.48e-08, maxiter=50):
     :param tol: float. the tolerance of the precision
     :param maxiter: int. maximum iteration
     :return: float. the root
+
+    reference: https://en.wikipedia.org/wiki/Brent%27s_method#Algorithm
     """
     def inverse_quadratic_interpolation_step(f, x0, x1, x2):
         def term(f, a, b, c):
