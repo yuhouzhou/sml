@@ -8,7 +8,7 @@ def pv(irr, c, m, n, d=0, f = 1):
     :param irr: yield to maturity
     :param c: annual coupon rate
     :param m: number of payments per year
-    :param n: time to maturity
+    :param n: years to maturity
     :param d: discount rate
     :param f: par value
     :return: present value or price

@@ -10,10 +10,10 @@ if __name__ == "__main__":
     years = np.arange(1, 11)
 
     for c in c_lst:
-        price_lst = [pv(irr=r, c=c, m=m, n=year, f=f) for year in years]
+        price_lst = [pv(irr=r, c=c, m=m, n=10-year, f=f) for year in years]
         plt.plot(years, price_lst, label='c $= {:.0f}\%$'.format(c * 100))
 
-    plt.xlabel("Time to Maturity")
+    plt.xlabel("Time to Maturity (Years)")
     plt.ylabel("Price")
     plt.title("Price vs. Time to Maturity for Level Coupon Bonds")
     plt.legend()
