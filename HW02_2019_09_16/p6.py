@@ -16,8 +16,10 @@ def forward_v(r, c, m, n, f):
     return pv(irr=r, c=c, m=m, n=n, f=f) * (1 + r / m) ** (n*m)
 
 if __name__ == '__main__':
+    # r = 0.08
     r_lst = [0.06, 0.08, 0.1]
     c = 0.08
+    # c_lst = [0.06, 0.08, 0.1]
     m = 2
     f = 1
 
@@ -33,7 +35,7 @@ if __name__ == '__main__':
     #     plt.plot(np.multiply(years, 1/2), forward_v_lst, label='${}$'.format(key.replace('%', '\%')))
 
     for r in r_lst:
-        forward_v_lst = [forward_v(r, c, m, 15-n, f) for n in years]
+        forward_v_lst = [forward_v(r, c, m, n, f) for n in years]
         plt.plot(years, forward_v_lst, label='$r = {}$'.format(r))
 
     plt.xlabel("Years to Maturity")

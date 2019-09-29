@@ -34,7 +34,7 @@ if __name__ == "__main__":
     years = np.arange(0, 101)
 
     for c in c_lst:
-        volat_lst = [volatility(c=c, y=r, n=100-year, m=m, f=f) for year in years]
+        volat_lst = [volatility(c=c, y=r, n=year, m=m, f=f) for year in years]
         plt.plot(years, volat_lst, label='c $= {:.0f}\%$'.format(c * 100))
 
     plt.xlabel("Time to Maturity (years)")
