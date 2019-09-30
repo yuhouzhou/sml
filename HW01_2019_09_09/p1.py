@@ -2,6 +2,12 @@ import numpy as np
 import timeit
 
 
+"""
+GTM: Try to write given values in floats.
+     Provide some explanations to your codes.
+given point : 8
+"""
+
 # explicit loop
 def w1(c_lst, x):
     pv = 0
@@ -42,7 +48,7 @@ def w4(c_lst, x):
 
 
 if __name__ == "__main__":
-    c_lst = 100 * np.arange(1000, 1800)
+    c_lst = 100.*np.arange(1000, 1800)
     r = 0.03
     x = 1 / (1 + r)
 

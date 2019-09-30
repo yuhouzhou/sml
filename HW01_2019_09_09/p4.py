@@ -1,6 +1,10 @@
 import numpy as np
 
 
+"""
+GTM: given points 3
+"""
+
 def irr(p, c):
     poly = np.append(c[::-1], -p)
     res = np.roots(poly)
@@ -12,4 +16,4 @@ def irr(p, c):
 if __name__ == '__main__':
     n = 40
     c, p = 100 * np.arange(42, n + 42), 80000
-    print('IRR =', irr(p, c))
+    print('IRR =', irr(p, c)*100)

@@ -1,6 +1,10 @@
 import numpy as np
 import pandas as pd
 
+"""
+GTM: well written 
+given points: 5
+"""
 
 def amortization(r, p, m, n):
     df = pd.DataFrame(index=range(m * n + 1))
