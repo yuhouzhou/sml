@@ -1,8 +1,13 @@
 import numpy as np
 
 
+"""
+GTM: There is a mistake in formulation of pv
+given point: 3.5
+"""
+
 def pv(c, m, n, r):
-    return c * (1 - (1 + r / m) ** (-n * m)) / (r / m)
+    return c * (1 - (1 + r / m) ** (-n * m)) / (1-1/(1+r / m))
 
 
 def c(fv, m, n, r):

@@ -1,0 +1,47 @@
+\documentclass[12pt,a4paper,oneside]{article}
+\usepackage{geometry}
+\geometry{left=3cm, right=3cm, top=3.5cm, bottom=3.5cm}
+\pagestyle{plain}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{float}
+\usepackage{amsmath,amscd,amsfonts,amssymb,amstext,amsthm}
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,patterns}
+\usepackage{enumitem}
+\usepackage{setspace,sectsty}
+
+\title{Grading: Problem 2}
+\date{\vspace{-6ex}\today}
+
+\begin{document}
+\maketitle
+
+For $N=120$, $r=0.02$, $m=12$, calculate the future value to be paid $A$ amount at the beginning of the each year:
+
+\begin{equation}
+  FV = \sum_{i=1}^{N}\left(1+\frac{r}{m}\right)^i =
+  \left(1+\frac{r}{m}\right)
+  \frac{\left(1+\frac{r}{m}\right)^{N}-1}{\frac{r}{m}}=
+  x\frac{x^N-1}{x-1},
+\end{equation}
+for $x=1+r/m$ and $FV$ is divided by $A$.
+This is the money which is saved during $120$ months. Now, $1500\$ $ will be withdrawn at the beggining of the each following $360$ months. For $M=360$, the present value can computed as
+\begin{equation}
+  PV = \sum_{i=0}^{M-1}1500\left(1+\frac{r}{m}\right)^{-i} =
+  1500\frac{1-\left(1+\frac{r}{m}\right)^{-M}}
+  {1-\left(\frac{1}{1+\frac{r}{m}}\right)}
+  = 1500 \frac{1-x^{-M}}{1-\frac{1}{x}}.
+\end{equation}
+for $x=1+r/m$.
+Hence, the future and the present value must be equal to each other and $A$ can be computed as
+\begin{equation}
+  A = \frac{PV}{FV} = 3057.44
+\end{equation}
+
+\vspace{6ex}
+\textbf{Explanation:} There is a mistake in the formulation of PV. (-0.5)
+
+\textbf{Given point:} $3.5$
+
+\end{document}
