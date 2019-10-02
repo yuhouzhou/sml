@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
     years = np.arange(0, 16)
 
-    r = 0.08
+    # r = 0.08
     #
     # r_lst_dict = {'r: 6% - 8%': np.linspace(r, 0.06,  n * m),
     #              'r: 8% - 8%' : np.linspace(r, r, n * m),
