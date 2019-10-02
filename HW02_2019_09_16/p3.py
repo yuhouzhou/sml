@@ -7,7 +7,7 @@ if __name__ == "__main__":
     f = 1000
     m = 2
     c_lst = [0.02, 0.06, 0.12]
-    years = np.arange(1, 11)
+    years = np.arange(0, 11)
 
     for c in c_lst:
         price_lst = [pv(irr=r, c=c, m=m, n=year, f=f) for year in years]
