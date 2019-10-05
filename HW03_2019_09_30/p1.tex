@@ -1,10 +1,75 @@
 \documentclass{article}
+\usepackage{amsmath}
+
 \begin{document}
     \section*{Problem 1 Answer}
+    The future value $FV$ of two bonds at horizon:
     \begin{equation}
+        \begin{aligned}
+            FV &= FV_{1} + FV_{2}\\
+            &=P_{1}(1+y)^{D} + P_{2}(1+y)^{D} \\
+        \end{aligned}
+        \label{fv}
+    \end{equation}
+    where $P_{1}$ is the price of the first bond; $P_{2}$ is the price of the second bond. $D$ is the horizon. $y$ is the interest rate.\\
+    For each bond, its price is
+    \begin{equation}
+        \label{pv}
+        P = \sum_{i=1}^{n} \frac{C}{(1+y)^i} + \frac{F}{(1+y)^{n}}
+    \end{equation}
+    where $n$ is the term to maturity. C is the coupon payment. $F$ is par value of the bond.\\
+    Use $P$ in (\ref{pv}) to substitute $P_{1}$ and $P_{2}$ in (\ref{fv}):
+
+    \begin{equation*}
+        \begin{aligned}
+            FV &= \left(\sum_{i=1}^{n_{1}} \frac{C_{1}}{(1+y)^{i}} + \frac{F_{1}}{(1+y)^{n_{1}}}\right)(1+y)^{D} + \left(\sum_{i=1}^{n_{2}} \frac{C_{2}}{(1+y)^{i}} + \frac{F_{2}}{(1+y)^{n_{2}}}\right)(1+y)^{D} \\
+            &= \sum_{i=1}^{n_{1}} C_{1}(1+y)^{D-i} + F_{1}(1+y)^{D-n_{1}} + \sum_{i=1}^{n_{2}} C_{2}(1+y)^{D-i} + F_{2}(1+y)^{D-n_{2}}
+        \end{aligned}
+    \end{equation*}
+    At horizon,
+    \begin{equation}
+        \label{require 1}
+        \frac{\partial FV}{\partial y} = \frac{\partial FV_{1}}{\partial y}=\frac{\partial FV_{2}}{\partial y}=0
+    \end{equation}
+    The partial derivative $FV$ over $y$:
+    \begin{equation}
+        \label{partial 1}
+        \begin{aligned}
+            \frac{\partial FV}{\partial y} &= \sum_{i=1}^{n_{1}} (D-i)C_{1}(1+y)^{D-i-1} + (D-n_{1})F_{1}(1+y)^{D-n_{1}-1} \\& +\sum_{i=1}^{n_{2}} (D-i)C_{2}(1+y)^{D-i-1} + (D-n_{2})F_{2}(1+y)^{D-n_{2}-1}
+        \end{aligned}
+    \end{equation}
+    According to (\ref{require 1}) and (\ref{partial 1}):
+    \begin{equation}
+        \begin{aligned}
+            \sum_{i=1}^{n_{1}} (D-i)C_{1}(1+y)^{D-i-1} + (D-n_{1})F_{1}(1+y)^{D-n_{1}-1} \\
+            +\sum_{i=1}^{n_{2}} (D-i)C_{2}(1+y)^{D-i-1} + (D-n_{2})F_{2}(1+y)^{D-n_{2}-1} &= 0\\
+            (1+y)^{D-1}\left[\sum_{i=1}^{n_{1}}\frac{(D-i)C_{1}}{(1+y)^{i}} + \frac{(D-n_{1})F_{1}}{(1+y)^{n_{1}}} + \sum_{i=1}^{n_{2}}\frac{(D-i)C_{2}}{(1+y)^{i}} + \frac{(D-n_{2})F_{2}}{(1+y)^{n_{2}}}\right] &= 0\\
+            \sum_{i=1}^{n_{1}}\frac{(D-i)C_{1}}{(1+y)^{i}} + \frac{(D-n_{1})F_{1}}{(1+y)^{n_{1}}} + \sum_{i=1}^{n_{2}}\frac{(D-i)C_{2}}{(1+y)^{i}} + \frac{(D-n_{2})F_{2}}{(1+y)^{n_{2}}} &= 0\\
+            \sum_{i=1}^{n_{1}}\left[\frac{C_{1}D}{(1+y)^i}-\frac{C_{1}i}{(1+y)^{i}}\right]+\frac{F_{1}D}{(1+y)^{n_{1}}}-\frac{F_{1}n_{2}}{(1+y)^{n_{1}}} \\+ \sum_{i=1}^{n_{2}}\left[\frac{C_{2}D}{(1+y)^i}-\frac{C_{2}i}{(1+y)^{i}}\right]+\frac{F_{2}D}{(1+y)^{n_{2}}}-\frac{F_{2}n_{2}}{(1+y)^{n_{2}}} &= 0\\
+            -\left[\sum_{i=1}^{n_{1}}\frac{C_{1}i}{(1+y)^{i}}+\frac{F_{1}n_{1}}{(1+y)^{n_{1}}}\right] + D \left[\sum_{i=1}^{n_{1}}\frac{C_{1}}{(1+y)^i}+\frac{F_{1}}{(1+y)^{n_{1}}}\right] \\  -\left[\sum_{i=1}^{n_{2}}\frac{C_{2}i}{(1+y)^{i}}+\frac{F_{2}n_{2}}{(1+y)^{n_{2}}}\right] + D \left[\sum_{i=1}^{n_{2}}\frac{C_{2}}{(1+y)^i}+\frac{F_{2}}{(1+y)^{n_{2}}}\right]&= 0\\\
+
+        \end{aligned}
+        \label{induction}
+    \end{equation}
+    Macaulay duration $MD$ of a coupon bond is:
+    \begin{equation}
+        \label{md}
+        MD = \frac{1}{P}\sum_{i=1}^{n}\left[\frac{Ci}{(1+y)^{i}}+\frac{Fn}{(1+y)^{n}}\right]
+    \end{equation}
+    substitute (\ref{md}) and (\ref{pv}) to (\ref{induction}):
+    \begin{equation*}
+        \begin{aligned}
+            -P_{1}D_{1} + DP_{1} - P_{2}D_{2} + DP_{2}= 0\\
+            D(P_{1}+P_{2})=P_{1}D_{1}+P_{2}D_{2}\\
+            \frac{P_1}{P_1+P_2}D_{1}
+            + \frac{P_2}{P_1+P_2}D_{2} = D
+        \end{aligned}
+    \end{equation*}
+    Write $\frac{P_1}{P_1+P_2}$ as $\omega_{1}$ and $\frac{P_2}{P_1+P_2}$ as $\omega_{2}$:
+    \begin{equation*}
         \omega_{1} + \omega_{2} = 1
-    \end{equation}
-    \begin{equation}
+    \end{equation*}
+    \begin{equation*}
         \omega_{1}D_{1}+\omega_{2}D_{2} = D
-    \end{equation}
+    \end{equation*}
 \end{document}
