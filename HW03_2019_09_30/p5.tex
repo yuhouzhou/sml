@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+    \section*{Problem 5 Answer}
+    According to the no-arbitrage arguments:
+    \begin{equation}
+        \label{no arb 1}
+        \Delta = \frac{f_{u}-f_{d}}{S_{0u}-S_{0d}}
+    \end{equation}
+    \begin{equation}
+        \label{no arb 2}
+        \Delta = \frac{f_{u}-f_{x}}{S_{0u}-S_{0x}}
+    \end{equation}
+    \begin{equation}
+        \label{no arb 3}
+        \Delta = \frac{f_{d}-f_{x}}{S_{0d}-S_{0x}}
+    \end{equation}
+    where $\Delta$ is the number of units of the stock we should hold for each option shorted in order to create a riskless portfolio. $f$ is the option price. $S_0$ is the stock price. Subscripts $u$, $d$, $x$ indicate the stock price goes up, down, or the other possibility. \\
+    According to (\ref{no arb 1}) and (\ref{no arb 2}):
+    \begin{equation}
+        \label{equal}
+        \frac{f_{u}-f_{d}}{S_{0u}-S_{0d}} = \frac{f_{u}-f_{x}}{S_{0u}-S_{0x}}
+    \end{equation}
+    Transform (\ref{equal}):
+    \begin{equation}
+        \label{equal 2}
+        \frac{f_{u}-f_{d}}{S_{0u}-S_{0d}} = \frac{f_{d}-f_{x}}{S_{0d}-S_{0x}}
+    \end{equation}
+    Find (\ref{equal 2}) is consistent with (\ref{no arb 1}) and (\ref{no arb 3}).
+    Since the no-arbitrage arguments is the only assumption of the binomial tree model, the analysis of two possibilities of the change of the stock price applies to three possibilities.
+    
+\end{document}
