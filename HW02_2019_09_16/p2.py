@@ -1,6 +1,9 @@
 import numpy as np
 from scipy.optimize import brentq
 
+"""
+GTM: given point: 2
+"""
 
 def pv(irr, c, m, n, d=0, f = 1):
     """

@@ -2,6 +2,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 from p2 import pv
 
+
+"""
+GTM: Due to ambiguity in the problem, full point.
+     Your answer is wrong.
+     Step 1: calculate the price at each interest rate
+    Step 2: calculate forward value for the price...
+given point: 3 + 0.5 (bonus point for giving the attempt)
+"""
+
 def forward_v(r, c, m, n, f):
     """
 
@@ -32,5 +41,5 @@ if __name__ == '__main__':
     plt.title("Forward Value vs. Years to Maturity")
     plt.legend()
     plt.tight_layout()
-    plt.savefig('p6.pdf')
+    #plt.savefig('p6.pdf')
     plt.show()

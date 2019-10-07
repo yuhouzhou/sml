@@ -2,6 +2,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+"""
+GTM: Due to wrong formulation -0.5
+given points 2.5
+"""
+
 def volatility(c, y, n, m, f=1):
     """
 
@@ -34,13 +39,16 @@ if __name__ == "__main__":
     years = np.arange(0, 101)
 
     for c in c_lst:
-        volat_lst = [volatility(c=c, y=r, n=year, m=m, f=f) for year in years]
+        """ GTM: you need to update interest rate semiannually """
+        volat_lst = [volatility(c=c, y=r/m, n=year, m=m, f=f) for year in years]
         plt.plot(years, volat_lst, label='c $= {:.0f}\%$'.format(c * 100))
-
+    
+    """GTM: since you are asked time to maturity, reverse the x axis.... """
+    plt.xlim(100, 0)
     plt.xlabel("Time to Maturity (years)")
     plt.ylabel("Volatility")
     plt.title("Volatility vs. Time to Maturity for Level Coupon Bonds")
     plt.legend()
     plt.tight_layout()
-    plt.savefig('p5.pdf')
+    #plt.savefig('p5.pdf')
     plt.show()

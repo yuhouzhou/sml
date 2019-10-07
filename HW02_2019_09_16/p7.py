@@ -3,6 +3,10 @@ import matplotlib.pyplot as plt
 from p2 import pv
 from scipy.optimize import brent
 
+"""
+GTM: 
+given points:  2
+"""
 
 def fv_horizon(r, m, n, f, horizon, c=0):
     """

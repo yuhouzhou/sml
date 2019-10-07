@@ -2,6 +2,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 from p2 import pv
 
+"""
+GTM: given point: 2
+"""
+
 if __name__ == "__main__":
     f = 1000
     m = 1

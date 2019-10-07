@@ -4,6 +4,10 @@ from sys import exit
 from timeit import Timer
 
 
+"""
+GTM:  given point 6
+"""
+
 def my_bisect(f, x0, x1, tol=1e-12, maxiter=50):
     """
 
@@ -187,13 +191,17 @@ if __name__ == '__main__':
     # print(my_secant(f, 0.5, 0.9), newton(f, 0.9))
     # print(my_brent(f, 0.5, 0.9), brentq(f, 0.5, 0.9))
 
-    print("IRR = {:.3f}%".format(irr(my_brent(f, 0, 1)) * 100))
+    """ GTM: I changed the function to the available brentq see the right value...."""
+    print("IRR = {:.3f}%".format(irr(brentq(f, 0, 1)) * 100))
+
+    """GTM: you wrote the function irr but forgot to use it...
+    """
 
     t0 = Timer('my_bisect(f, .5, .9)', 'from __main__ import my_bisect, f')
-    print("my_bisect:\n\tvalue:{:.7f}, time:{:.5f} sec".format(my_bisect(f, .5, .9), t0.timeit(number=100)))
+    print("my_bisect:\n\tvalue:{:.7f}, time:{:.5f} sec".format(irr(my_bisect(f, .5, .9)), t0.timeit(number=100)))
     t1 = Timer('my_newton(f, .5, fprime, maxiter=500)', 'from __main__ import my_newton, f, fprime')
-    print("my_newton:\n\tvalue:{:.7f}, time:{:.5f} sec".format(my_newton(f, .5, fprime, maxiter=500), t1.timeit(number=100)))
+    print("my_newton:\n\tvalue:{:.7f}, time:{:.5f} sec".format(irr(my_newton(f, .5, fprime, maxiter=500)), t1.timeit(number=100)))
     t2 = Timer('my_secant(f, .5, .9)', 'from __main__ import my_secant, f')
-    print("my_secant:\n\tvalue:{:.7f}, time:{:.5f} sec".format(my_secant(f, .5, .9), t2.timeit(number=100)))
+    print("my_secant:\n\tvalue:{:.7f}, time:{:.5f} sec".format(irr(my_secant(f, .5, .9)), t2.timeit(number=100)))
     t3 = Timer('my_brent(f, .5, fprime, maxiter=500)', 'from __main__ import my_prent, f')
-    print("my_brent:\n\tvalue:{:.7f}, time:{:.5f} sec".format(my_brent(f, .5, .9), t2.timeit(number=100)))
+    print("my_brent:\n\tvalue:{:.7f}, time:{:.5f} sec".format(irr(my_brent(f, .5, .9)), t2.timeit(number=100)))
