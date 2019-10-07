@@ -39,6 +39,21 @@ if __name__ == "__main__":
     df = pd.read_csv('data.csv',
                      usecols=['DATA_TYPE_FM', 'OBS_VALUE', 'INSTRUMENT_FM'],
                      )
+
+    """ Brief Discussion about Data
+    
+    For this problem, columns "INSTRUMENT_FM", "DATA_TYPE_FM", and "OBS_VALUE" are of
+    interests. 
+    
+    "INSTRUMENT_FM" indicates the type of bonds. "G_N_A" stands for AAA rated bonds, and "G_N_A" stands for all bonds. 
+    
+    "DATA_TYPE_FM" tells the type of "OBS_VALUE" (OBServed_VALUE). Since we want to plot spot rate vs. 
+    years to maturity,we are only interested about the type started with "SR_", which stands for spot rate. 
+    The information behind "SR_" is the time to maturity. This need to convert from string to float value, 
+    and then can be used in plotting.
+    
+    "OBS_VALUE" from the "SR_" type is the spot rates corresponding to their time to maturity.
+    """
     df_3a = preproc(df, bond_type='G_N_A')
     df_all = preproc(df, bond_type='G_N_C')
 
