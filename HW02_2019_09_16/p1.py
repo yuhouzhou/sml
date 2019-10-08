@@ -197,6 +197,10 @@ if __name__ == '__main__':
     """GTM: you wrote the function irr but forgot to use it...
     """
     """Yuhou: irr() is used on line 195, 202, 204, and 208 ;)"""
+    
+    """ GTM: I wrote them... Track down my changes well...
+             I do not only comment but also make some changes in the code...
+             You only used at line 195.   """
 
     t0 = Timer('my_bisect(f, .5, .9)', 'from __main__ import my_bisect, f')
     print("my_bisect:\n\tvalue:{:.7f}, time:{:.5f} sec".format(irr(my_bisect(f, .5, .9)), t0.timeit(number=100)))
