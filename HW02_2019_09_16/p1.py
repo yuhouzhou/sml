@@ -201,7 +201,7 @@ if __name__ == '__main__':
     """ GTM: I wrote them... Track down my changes well...
              I do not only comment but also make some changes in the code...
              You only used at line 195.   """
-    """Yuhou: Ahh, I see. Thank you for your correction."""
+    """Yuhou: Ahh, I see. Thank you for your correction and grading."""
 
     t0 = Timer('my_bisect(f, .5, .9)', 'from __main__ import my_bisect, f')
     print("my_bisect:\n\tvalue:{:.7f}, time:{:.5f} sec".format(irr(my_bisect(f, .5, .9)), t0.timeit(number=100)))
