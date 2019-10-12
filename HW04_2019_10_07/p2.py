@@ -39,3 +39,10 @@ if __name__ == '__main__':
     plt.tight_layout()
     plt.savefig('p2.pdf')
     plt.show()
+
+    """Discussion
+    The plot shows that the logarithm of the error constantly decreases according to the increment of n. However, my 
+    implementation causes an oscillation of errors, and the plot shows a repeated pattern of butterflies. This pattern
+    can be used to accelerate the computing, i.e. with small n, as shown on th plot when n is around 100, the binomial
+    tree method already gets pretty good result, and we thus don't need higher n steps, which saves much computing time.
+    """
