@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 
 
 def binomial_tree(payoff, n, rp, sigma, S, K, T):
@@ -34,18 +33,22 @@ def binomial_tree(payoff, n, rp, sigma, S, K, T):
     poff_n = np.fliplr(poff).diagonal()
 
     def BI_cal(poff_n, p, rp, dt):
+        poff_n = list(poff_n)
         v_u = poff_n[0]
         v_d = poff_n[1]
         if len(poff_n) > 2:
             # Discounted payoff
             poff_d = []
-            while poff_n != []:
+            while True:
                 v_n = np.exp(-rp * dt) * (p * v_u + (1 - p) * v_d)
                 poff_d.append(v_n)
-                poff_n = np.delete(poff_n, 0)
-                v_u = poff_n[0]
-                v_d = poff_n[1]
-            BI_cal(poff_d, p, rp, dt)
+                poff_n.pop(0)
+                if len(poff_n) > 1:
+                    v_u = poff_n[0]
+                    v_d = poff_n[1]
+                else:
+                    break
+            return BI_cal(poff_d, p, rp, dt)
         else:
             return np.exp(-rp * dt) * (p * v_u + (1 - p) * v_d)
 
