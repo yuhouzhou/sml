@@ -64,6 +64,12 @@ def binomial_tree(payoff, n, rp, sigma, S, K, T):
 
 
 def payoff(S, K):
+    """
+    Calculate the payoff of a call option
+    :param S: the stock price
+    :param K: the strike price
+    :return: the payoff
+    """
     return np.maximum(0, S - K)
 
 
