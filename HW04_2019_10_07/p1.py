@@ -34,7 +34,7 @@ def binomial_tree(payoff, n, rp, sigma, S, K, T):
     # Payoff at maturity
     poff_T = np.fliplr(poff).diagonal()
 
-    def BI_cal(poff_T, p, rp, dt):
+    def BI_cal_recur(poff_T, p, rp, dt):
         """
         Backwards Induction (recursive)
         :param poff_T: payoff at maturity
@@ -54,13 +54,41 @@ def binomial_tree(payoff, n, rp, sigma, S, K, T):
                 v_n = np.exp(-rp * dt) * (p * v_u + (1 - p) * v_d)
                 poff_d.append(v_n)
                 poff_T.pop(0)
-            return BI_cal(poff_d, p, rp, dt)
+            return BI_cal_recur(poff_d, p, rp, dt)
         else:
             v_u = poff_T[0]
             v_d = poff_T[1]
             return np.exp(-rp * dt) * (p * v_u + (1 - p) * v_d)
 
-    return BI_cal(poff_T, p, rp, dt)
+    def BI_cal_iter(poff_T, p, rp, dt):
+        """
+        Backwards Induction (iterative)
+        :param poff_T: payoff at maturity
+        :param p: the probability of an upwards price movement
+        :param rp: the risk-free interest rate
+        :param dt: the step size between time slices of the model
+        :return: the option price at time zero
+        """
+        poff_T = list(poff_T)
+        poff_d = []
+        assert len(poff_T) > 1
+        while len(poff_T) > 1:
+            v_u = poff_T[0]
+            v_d = poff_T[1]
+            # backwards induction formula
+            v_n = np.exp(-rp * dt) * (p * v_u + (1 - p) * v_d)
+            poff_d.append(v_n)
+            poff_T.pop(0)
+            if len(poff_T) == 1:
+                poff_T = poff_d
+                poff_d = []
+        return v_n
+
+    IMPLEMENT = 'recursive'
+    if IMPLEMENT == 'recursive':
+        return BI_cal_recur(poff_T, p, rp, dt)
+    else:
+        return BI_cal_iter(poff_T, p, rp, dt)
 
 
 def payoff(S, K):
