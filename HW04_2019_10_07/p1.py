@@ -7,12 +7,12 @@ def binomial_tree(payoff, n, rp, sigma, S, K, T):
     Reference: https://www.goddardconsulting.ca/option-pricing-binomial-index.html
     :param payoff: a function that takes the stock price S (possibly a vector) and strike price K as arguments and
                     returns the payoff
-    :param n: the number of steps,
-    :param rp: the risk-free period interest rate,
-    :param sigma: the volatility,
-    :param S: the initial stock price,
-    :param K: the strike price,
-    :param T: the maturity.
+    :param n: the number of steps
+    :param rp: the risk-free period interest rate
+    :param sigma: the volatility
+    :param S: the initial stock price
+    :param K: the strike price
+    :param T: the maturity
     :return: the price of the option at time T = 0
     """
     # Calculating the increase rate and decrease rate
