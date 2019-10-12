@@ -3,7 +3,8 @@ import numpy as np
 
 def binomial_tree(payoff, n, rp, sigma, S, K, T):
     """
-    The binomial tree via backwards induction
+    The binomial tree via backwards induction.
+    Reference: https://www.goddardconsulting.ca/option-pricing-binomial-index.html
     :param payoff: a function that takes the stock price S (possibly a vector) and strike price K as arguments and
                     returns the payoff
     :param n: the number of steps,
@@ -30,29 +31,36 @@ def binomial_tree(payoff, n, rp, sigma, S, K, T):
     # Discount the Payoffs by Backwards Induction
     dt = T / n
     p = (np.exp(rp * dt) - d) / (u - d)
-    poff_n = np.fliplr(poff).diagonal()
+    # Payoff at maturity
+    poff_T = np.fliplr(poff).diagonal()
 
-    def BI_cal(poff_n, p, rp, dt):
-        poff_n = list(poff_n)
-        v_u = poff_n[0]
-        v_d = poff_n[1]
-        if len(poff_n) > 2:
-            # Discounted payoff
+    def BI_cal(poff_T, p, rp, dt):
+        """
+        Backwards Induction (recursive)
+        :param poff_T: payoff at maturity
+        :param p: the probability of an upwards price movement
+        :param rp: the risk-free interest rate
+        :param dt: the step size between time slices of the model
+        :return: the option price at time zero
+        """
+        poff_T = list(poff_T)
+        if len(poff_T) > 2:
+            # Discounted payoff list
             poff_d = []
-            while True:
+            while len(poff_T) > 1:
+                v_u = poff_T[0]
+                v_d = poff_T[1]
+                # backwards induction formula
                 v_n = np.exp(-rp * dt) * (p * v_u + (1 - p) * v_d)
                 poff_d.append(v_n)
-                poff_n.pop(0)
-                if len(poff_n) > 1:
-                    v_u = poff_n[0]
-                    v_d = poff_n[1]
-                else:
-                    break
+                poff_T.pop(0)
             return BI_cal(poff_d, p, rp, dt)
         else:
+            v_u = poff_T[0]
+            v_d = poff_T[1]
             return np.exp(-rp * dt) * (p * v_u + (1 - p) * v_d)
 
-    return BI_cal(poff_n, p, rp, dt)
+    return BI_cal(poff_T, p, rp, dt)
 
 
 def payoff(S, K):
