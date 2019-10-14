@@ -2,6 +2,11 @@ from p3 import payoff
 import numpy as np
 import matplotlib.pyplot as plt
 
+"""
+GTM:  
+given point: 4
+"""
+
 if __name__ == '__main__':
     s = np.arange(30, 110)
     payoff_butterfly = payoff(s=s, x=50, type='call', position='long') +\
