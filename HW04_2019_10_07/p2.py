@@ -1,6 +1,6 @@
 from HW04_2019_10_07.p1 import binomial_tree, payoff
 import numpy as np
-from scipy.stats import norm
+from scipy.stats import norm, stats
 import matplotlib.pyplot as plt
 
 
@@ -32,6 +32,11 @@ if __name__ == '__main__':
     c_tree_arr = np.asarray([binomial_tree(payoff=payoff, n=n, rp=r, sigma=sigma, S=S, K=K, T=T) for n in n_lst])
     c_black_arr = np.ones(len(n_lst)) * black_scholes(r=r, sigma=sigma, S=S, K=K, T=T)
     logErr_lst = np.log(np.absolute(c_tree_arr - c_black_arr))
+
+    slope, intercept, r_value, p_value, std_err = stats.linregress(n_lst[:100], logErr_lst[:100])
+    print("Rate of Convergence:", slope)
+
+    # plt.scatter(n_lst, logErr_lst)
     plt.plot(n_lst, logErr_lst)
     plt.title('Logarithm of the Error vs. n')
     plt.xlabel('Steps of Binomial Trees $n$')
