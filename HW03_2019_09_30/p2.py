@@ -3,6 +3,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
+"""
+GTM : Well written description.
+given points : 7
+"""
+
 def ym2y(ym):
     """
     Convert "year month" to "year"
