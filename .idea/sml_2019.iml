@@ -11,7 +11,11 @@
     <orderEntry type="library" name="R User Library" level="project" />
     <orderEntry type="library" name="R Skeletons" level="application" />
   </component>
+  <component name="PackageRequirementsSettings">
+    <option name="requirementsPath" value="" />
+  </component>
   <component name="PyDocumentationSettings">
+    <option name="myDocStringFormat" value="Google" />
     <option name="renderExternalDocumentation" value="true" />
   </component>
   <component name="TestRunnerService">
