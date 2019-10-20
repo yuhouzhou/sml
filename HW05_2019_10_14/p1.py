@@ -22,6 +22,7 @@ if __name__ == '__main__':
     ax = fig.add_subplot(1, 1, 1)
     ax.set_title("Relative Error vs. n")
     ax.set_yscale("log")
+    ax.set_xscale("log")
     ax.set_xlabel("n")
     ax.set_ylabel("Relative Error")
     ax.plot(n_lst, r_err_lst)
@@ -29,5 +30,10 @@ if __name__ == '__main__':
     plt.show()
 
     clf = linear_model.Lasso(alpha=0.1)
-    clf.fit(n_lst.reshape(-1, 1), np.log(r_err_lst))
-    print(clf.coef_)
+    clf.fit(np.log(n_lst.reshape(-1, 1)), np.log(r_err_lst))
+    print('Rate of Convergence:', clf.coef_)
+
+    """Comment
+    The plot of the logarithm of the relative error is a straight line with slope -0.8850278.
+    The next order of the Stirling approximation is f(n)/(12n). 
+    """

@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def brownian(N, seed):
     """Generate a standard brownian path
 
