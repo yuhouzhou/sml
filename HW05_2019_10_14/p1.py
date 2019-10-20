@@ -13,7 +13,8 @@ def relative_err(true_v, comp_v):
 
 
 if __name__ == '__main__':
-    n_lst = np.arange(1, 101)
+    N = 100
+    n_lst = np.arange(1, N+1)
     stirling_lst = stirling(n_lst)
     factorial_lst = factorial(n_lst)
     r_err_lst = relative_err(factorial_lst, stirling_lst)
@@ -32,6 +33,8 @@ if __name__ == '__main__':
     clf = linear_model.Lasso(alpha=0.1)
     clf.fit(np.log(n_lst.reshape(-1, 1)), np.log(r_err_lst))
     print('Rate of Convergence:', clf.coef_)
+    print('Coefficient of 1/n:',
+        np.exp(np.log(N)+np.log(r_err_lst)[N-2])+clf.coef_*(np.log(N)-np.log(N-1)))
 
     """Comment
     The plot of the logarithm of the relative error is a straight line with slope -0.8850278.
