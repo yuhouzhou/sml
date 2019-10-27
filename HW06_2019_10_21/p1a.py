@@ -37,8 +37,8 @@ def _draw_subplot(b_arr, mean_lst, std_lst, steps, mu, sigma):
             plt.plot(steps, b, c='c')
 
     plt.xlabel('$t$')
-    plt.ylabel('$W(t)$')
-    plt.title('Ensemble of Geometric Brownian Paths $W(t)$, with $\mu = {}, \sigma = {}$'.format(mu, sigma))
+    plt.ylabel('$S$')
+    plt.title('Ensemble of Geometric Brownian Paths $S$, with $\mu = {}, \sigma = {}$'.format(mu, sigma))
     plt.legend()
 
 
