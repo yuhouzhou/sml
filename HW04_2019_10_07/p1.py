@@ -1,6 +1,13 @@
 import numpy as np
 
 
+"""
+GTM: did you run the code? So many recursions...
+     Not able to get any value from the binomial tree.. (-0.5)
+     Code is not vectorized and inefficiently written (while and if loops)... (-1)
+given point: 12.5
+"""
+
 def binomial_tree(payoff, n, rp, sigma, S, K, T):
     """
     The binomial tree via backwards induction.

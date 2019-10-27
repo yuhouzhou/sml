@@ -1,8 +1,19 @@
-from HW04_2019_10_07.p1 import binomial_tree, payoff
+#from HW04_2019_10_07.p1 import binomial_tree, payoff
+from p1 import binomial_tree, payoff
 import numpy as np
 from scipy.stats import norm, stats
 import matplotlib.pyplot as plt
 
+"""
+GTM: In loglog plot, we do not compute the logarithmic value of
+     the error or periods. Loglog plot sketch the graph in logarithmic
+     scale so that order of scale can be detected easily. When one looks
+     at the axes, it is visible that actual error and period values are
+     replaced on them in log-scaling.
+     wrong loglog plotting...
+     plotting the error scale wrong... (-0.5)
+given points: 5.5
+"""
 
 def black_scholes(r, sigma, S, K, T):
     """
@@ -28,7 +39,10 @@ if __name__ == '__main__':
     # print(binomial_tree(payoff=payoff, n=100, rp=r, sigma=sigma, S=S, K=K, T=T))
     # print(black_scholes(r=r, sigma=sigma, S=S, K=K, T=T))
 
-    n_lst = range(1, 501, 1)
+    #n_lst = range(1, 501, 1)
+    """ GTM: choosing well distributed points depending on data 
+    helps much more... """
+    n_lst = np.array(1.3**np.arange(1,25),dtype=int)
     c_tree_arr = np.asarray([binomial_tree(payoff=payoff, n=n, rp=r, sigma=sigma, S=S, K=K, T=T) for n in n_lst])
     c_black_arr = np.ones(len(n_lst)) * black_scholes(r=r, sigma=sigma, S=S, K=K, T=T)
     Err_lst = np.absolute(c_tree_arr - c_black_arr)
@@ -37,14 +51,16 @@ if __name__ == '__main__':
     print("Rate of Convergence:", slope)
 
     # plt.scatter(n_lst, logErr_lst)
-    plt.plot(n_lst, Err_lst)
+    plt.plot(n_lst, Err_lst,'*')
+    """GTM: you are supposed to plot a reference lien as well... """
+    plt.loglog(n_lst, 0.01/n_lst, label='linear fit')
     plt.title('Logarithm of the Error vs. n')
     plt.xlabel('Steps of Binomial Trees $n$')
     plt.ylabel('Error')
     plt.xscale('log')
     plt.yscale('log')
     plt.tight_layout()
-    plt.savefig('p2.pdf')
+    #plt.savefig('p2.pdf')
     plt.show()
 
     """Discussion
