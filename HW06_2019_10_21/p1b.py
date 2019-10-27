@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def binomial_s(N, rp, sigma, S, T):
@@ -25,7 +26,8 @@ def binomial_s(N, rp, sigma, S, T):
     return S * u ** xx * d ** yy
 
 
-def path_generator(lattice):
+def path_generator(lattice, seed):
+    np.random.seed(seed)
     coordinate = [0, 0]
     path = []
     assert lattice.shape[0] == lattice.shape[1]
@@ -33,7 +35,7 @@ def path_generator(lattice):
     for x in x_lst:
         path.append(lattice[coordinate[0], coordinate[1]])
         coordinate[x] += 1
-    return path
+    return pd.Series(path)
 
 
 def diag_index(n):
@@ -64,18 +66,18 @@ def meanNstd_arr(lattice):
     return mean_arr, std_arr
 
 
-def draw_subplot(lattice, mean_arr, std_arr, rp, sigma, T, N):
+def draw_subplot(path_df, mean_arr, std_arr, rp, sigma, T, N):
     plt.plot(np.linspace(0, T, N), mean_arr, c='r', label='mean')
     plt.plot(np.linspace(0, T, N), mean_arr - std_arr, c='g', label='standard deviation')
     plt.plot(np.linspace(0, T, N), mean_arr + std_arr, c='g')
 
-    for _ in range(10):
-        if _ == 0:
-            plt.plot(np.linspace(0, T, N), path_generator(lattice), c='b', label='binomial tree path')
+    path_df.columns = np.arange(0, path_df.shape[1])
+    for column in path_df.columns[::100]:
+        if column == 0:
+            plt.plot(np.linspace(0, T, N), path_df[column], c='b', label='binomial tree path')
         else:
-            plt.plot(np.linspace(0, T, N), path_generator(lattice), c='b')
+            plt.plot(np.linspace(0, T, N), path_df[column], c='b')
 
-    plt.yscale("log")
     plt.xlabel('$t$')
     plt.ylabel('$S$')
     plt.title('Ensemble of Binomial Tree Paths $S$, with $rp = {}, \sigma = {}$'.format(rp, sigma))
@@ -86,25 +88,39 @@ if __name__ == '__main__':
     N = 500
     T = 1
     S = 1
+    seeds = np.arange(0, 1000)
 
     sigma0 = 0.2
     rp0 = 0.6
     lattice0 = binomial_s(N - 1, rp0, sigma0, S, T)
-    mean_arr0, std_arr0 = meanNstd_arr(lattice0)
+    path_df0 = pd.DataFrame()
+    for seed in seeds:
+        path_df0 = pd.concat([path_df0, path_generator(lattice0, seed)], axis=1)
+    mean_arr0 = path_df0.mean(axis = 1)
+    std_arr0 = path_df0.std(axis = 1)
 
     sigma1 = 0.6
     rp1 = 0.2
     lattice1 = binomial_s(N - 1, rp1, sigma1, S, T)
-    mean_arr1, std_arr1 = meanNstd_arr(lattice1)
+    path_df1 = pd.DataFrame()
+    for seed in seeds:
+        path_df1 = pd.concat([path_df1, path_generator(lattice1, seed)], axis=1)
+    mean_arr1 = path_df1.mean(axis=1)
+    std_arr1 = path_df1.std(axis=1)
 
     plt.rc('figure', figsize=(14, 10))
 
     plt.subplot(2, 1, 1)
-    draw_subplot(lattice0, mean_arr0, std_arr0, rp0, sigma0, T, N)
+    draw_subplot(path_df0, mean_arr0, std_arr0, rp0, sigma0, T, N)
 
     plt.subplot(2, 1, 2)
-    draw_subplot(lattice1, mean_arr1, std_arr1, rp1, sigma1, T, N)
+    draw_subplot(path_df1, mean_arr1, std_arr1, rp1, sigma1, T, N)
 
     plt.tight_layout()
     plt.savefig('p1b.pdf')
     plt.show()
+
+    """Description
+    From fig p1c, subplot 1 shows that when mu = 0.2, sigma = 0.6, GBM and Binomial Tree produce similar results.
+    When mu = 0.6, sigma 0.2, they are different, because binomial tree model can't incorporate drift rate.
+    """
