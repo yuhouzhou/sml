@@ -1,5 +1,5 @@
-#from HW04_2019_10_07.p1 import binomial_tree, payoff
-from p1 import binomial_tree, payoff
+from HW04_2019_10_07.p1 import binomial_tree, payoff
+# from p1 import binomial_tree, payoff
 import numpy as np
 from scipy.stats import norm, stats
 import matplotlib.pyplot as plt

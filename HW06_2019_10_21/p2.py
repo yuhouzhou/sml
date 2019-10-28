@@ -15,7 +15,8 @@ if __name__ == '__main__':
     price_black = black_scholes(r=r, sigma=sigma, S=S0, K=X, T=T)
 
     diff_lst = []
-    i_lst = np.arange(1, 1000)
+    # i_lst = np.arange(1, 1000)
+    i_lst = np.array(1.3 ** np.arange(1, 25), dtype=int)
 
     for i in i_lst:
         seeds = np.arange(i)
@@ -37,8 +38,9 @@ if __name__ == '__main__':
     slope, intercept, r_value, p_value, std_err = stats.linregress(np.log(i_lst), np.log(diff_lst))
     print("Rate of Convergence:", slope)
 
-    plt.rc('figure', figsize=(14, 10))
-    plt.plot(i_lst, diff_lst, 'co')
+    # plt.rc('figure', figsize=(14, 10))
+    plt.plot(i_lst, diff_lst, '*')
+    plt.loglog(i_lst, 0.54 / i_lst, label='linear fit')
     plt.xlabel('number of samples')
     plt.ylabel('deviation')
     plt.title('Deviation between GBM Monte-Carlo and Black-Scholes vs. Number of Samples')
