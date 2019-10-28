@@ -32,6 +32,10 @@ def stratonovich(N, T, S0, seed):
     w_t = brownian(N, T, S0=S0, seed=seed)
     w_0 = w_t[0:N - 1]
     w_1 = w_t[1:N]
+    # Etheridge, A Course in Financial Calculus, P78.
+    # This formula is a bit different from the one given by the problem,
+    # but they are essentially the same. Using this formula, we don't need
+    # to coarsen w_0 and w_1.
     Stratonovich = (w_1 + w_0) / 2 * (w_1 - w_0)
     return np.cumsum(Stratonovich)
 

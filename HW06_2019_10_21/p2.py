@@ -36,7 +36,7 @@ if __name__ == '__main__':
         diff_lst.append(diff)
 
     slope, intercept, r_value, p_value, std_err = stats.linregress(np.log(i_lst), np.log(diff_lst))
-    print("Rate of Convergence:", slope)
+    print("Rate of Convergence:", np.abs(slope))
 
     # plt.rc('figure', figsize=(14, 10))
     plt.plot(i_lst, diff_lst, '*')
