@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def brownian(N, T, S0, seed):
     """Generate a standard brownian path
 
@@ -18,6 +19,7 @@ def brownian(N, T, S0, seed):
     path = np.cumsum(dz)
     return path
 
+
 def ito(N, T, S0, seed):
     w_t = brownian(N, T, S0=S0, seed=seed)
     w_0 = w_t[0:N - 1]
@@ -30,7 +32,7 @@ def stratonovich(N, T, S0, seed):
     w_t = brownian(N, T, S0=S0, seed=seed)
     w_0 = w_t[0:N - 1]
     w_1 = w_t[1:N]
-    Stratonovich = (w_1+w_0)/2 * (w_1 - w_0)
+    Stratonovich = (w_1 + w_0) / 2 * (w_1 - w_0)
     return np.cumsum(Stratonovich)
 
 
@@ -49,8 +51,8 @@ if __name__ == "__main__":
     # ito2strat = 1 / 2 * np.linspace(0, T, N-1) + Ito
 
     plt.plot(np.linspace(0, T, N), w_t, label='Brownian Motion')
-    plt.plot(np.linspace(0, T, N-1), Ito, label='Ito Integral')
-    plt.plot(np.linspace(0, T, N-1), Stratonovich, label='Stratonovich Integral')
+    plt.plot(np.linspace(0, T, N - 1), Ito, label='Ito Integral')
+    plt.plot(np.linspace(0, T, N - 1), Stratonovich, label='Stratonovich Integral')
     # plt.plot(np.linspace(0, T, N-1), ito2strat)
     plt.xlabel('$t$')
     plt.ylabel('$s$')
