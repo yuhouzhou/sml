@@ -17,10 +17,9 @@ def geom_brownian(N, mu, sigma, seed):
     np.random.seed(seed)
     dt = 1 / N
     S0 = 1
-    ds = np.exp((mu - sigma ** 2 / 2) * dt + sigma * np.random.normal(loc = 0, scale = np.sqrt(dt), size=N - 1))
-    path = S0*ds.cumprod()
+    ds = np.exp((mu - sigma ** 2 / 2) * dt + sigma * np.random.normal(loc=0, scale=np.sqrt(dt), size=N - 1))
+    path = S0 * ds.cumprod()
     return np.insert(path, 0, S0)
-
 
 
 def _draw_subplot(b_arr, mean_lst, std_lst, steps, mu, sigma):
@@ -51,25 +50,25 @@ if __name__ == '__main__':
     # compute brownian paths
     mu0 = 0.2
     sigma0 = 0.6
-    b_arr0 = np.asarray([geom_brownian(N=N, mu=mu0, sigma=sigma0, seed=seed) for seed in seeds])
+    b_lst0 = np.asarray([geom_brownian(N=N, mu=mu0, sigma=sigma0, seed=seed) for seed in seeds])
     # compute mean and std. of every step
-    mean_lst0 = np.mean(b_arr0, axis=0)
-    std_lst0 = np.std(b_arr0, axis=0)
+    mean_lst0 = np.mean(b_lst0, axis=0)
+    std_lst0 = np.std(b_lst0, axis=0)
 
     # compute brownian paths
     mu1 = 0.6
     sigma1 = 0.2
-    b_arr1 = np.asarray([geom_brownian(N=N, mu=mu1, sigma=sigma1, seed=seed) for seed in seeds])
+    b_lst1 = np.asarray([geom_brownian(N=N, mu=mu1, sigma=sigma1, seed=seed) for seed in seeds])
     # compute mean and std. of every step
-    mean_lst1 = np.mean(b_arr1, axis=0)
-    std_lst1 = np.std(b_arr1, axis=0)
+    mean_lst1 = np.mean(b_lst1, axis=0)
+    std_lst1 = np.std(b_lst1, axis=0)
 
     plt.rc('figure', figsize=(14, 10))
 
     plt.subplot(2, 1, 1)
-    _draw_subplot(b_arr0, mean_lst0, std_lst0, steps, mu0, sigma0)
+    _draw_subplot(b_lst0, mean_lst0, std_lst0, steps, mu0, sigma0)
     plt.subplot(2, 1, 2)
-    _draw_subplot(b_arr1, mean_lst1, std_lst1, steps, mu1, sigma1)
+    _draw_subplot(b_lst1, mean_lst1, std_lst1, steps, mu1, sigma1)
 
     plt.tight_layout()
     plt.savefig('p1a.pdf')
