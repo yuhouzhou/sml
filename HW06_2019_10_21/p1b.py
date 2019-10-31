@@ -77,5 +77,5 @@ if __name__ == '__main__':
     draw_subplot(b_arr1, mean_arr1, std_arr1, steps, mu1, sigma1)
 
     plt.tight_layout()
-    plt.savefig('p1a.pdf')
+    plt.savefig('p1b.pdf')
     plt.show()
