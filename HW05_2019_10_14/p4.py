@@ -2,6 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+"""
+GTM: 
+given points: 5
+"""
+
 def brownian(N, seed):
     """Generate a standard brownian path
 

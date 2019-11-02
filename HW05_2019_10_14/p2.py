@@ -3,6 +3,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+"""
+GTM: It is more helpful to plot binomial values for n=10,n=100 and Gaussian 
+     (three at the same plot) for each p values.
+given points: 5
+"""
+
 def x(n, p):
     """Convert x coordinate of binomial distribution
 
@@ -100,7 +106,7 @@ if __name__ == '__main__':
 
     fig.tight_layout()
 
-    plt.savefig('p2.pdf')
+    #plt.savefig('p2.pdf')
     plt.show()
 
     """Comment

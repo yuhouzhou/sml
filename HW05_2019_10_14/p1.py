@@ -1,8 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.special import factorial
-from sklearn import linear_model
+#from sklearn import linear_model
 
+
+"""
+GTM: Indeed, the slope must be very close to -1.
+     The slope can be also found by plotting a line as I did.
+given points: 5
+"""
 
 def stirling(n):
     return np.sqrt(2 * np.pi * n) * (n / np.e) ** n
@@ -26,8 +32,10 @@ if __name__ == '__main__':
     ax.set_xscale("log")
     ax.set_xlabel("n")
     ax.set_ylabel("Relative Error")
-    ax.plot(n_lst, r_err_lst)
-    plt.savefig('p1.pdf')
+    ax.plot(n_lst, r_err_lst,'*')
+    ax.plot(n_lst,1./(12*n_lst), label = 'line 1/(12n)')
+    #plt.savefig('p1.pdf')
+    plt.legend()
     plt.show()
 
     clf = linear_model.Lasso(alpha=0.1)

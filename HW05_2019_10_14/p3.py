@@ -2,6 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+"""
+GTM: It would be nice to remember central limit theorem in the comment.
+given points: 5
+"""
+
 def j2x(j):
     return (j - np.mean(j)) / np.std(j)
 
