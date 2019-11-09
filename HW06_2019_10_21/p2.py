@@ -5,6 +5,12 @@ from HW06_2019_10_21.p1a import geom_brownian
 from HW04_2019_10_07.p1 import payoff
 from HW04_2019_10_07.p2 import black_scholes
 
+"""
+GTM: - Arrange your libraries properly.
+     - Wrong reference line ... -0.5
+given points: 4.5
+"""
+
 if __name__ == '__main__':
     X = 0.9
     T = 1
@@ -16,7 +22,9 @@ if __name__ == '__main__':
 
     diff_lst = []
     # i_lst = np.arange(1, 1000)
-    i_lst = np.array(1.3 ** np.arange(1, 25), dtype=int)
+    #i_lst = np.array(1.3 ** np.arange(1, 25), dtype=int)
+    """ GTM: try to plot for this interval! What do you see?"""
+    i_lst = np.array(1.5 ** np.arange(1, 35), dtype=int)
 
     for i in i_lst:
         seeds = np.arange(i)
@@ -40,11 +48,12 @@ if __name__ == '__main__':
 
     # plt.rc('figure', figsize=(14, 10))
     plt.plot(i_lst, diff_lst, '*')
+    """GTM: try to draw sqrt of i_lst"""
     plt.loglog(i_lst, 0.54 / i_lst, label='linear fit')
     plt.xlabel('number of samples')
     plt.ylabel('deviation')
     plt.title('Deviation between GBM Monte-Carlo and Black-Scholes vs. Number of Samples')
     plt.xscale('log')
     plt.yscale('log')
-    plt.savefig('p2.pdf')
+    #plt.savefig('p2.pdf')
     plt.show()

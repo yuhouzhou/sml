@@ -2,6 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+"""
+GTM:
+given poitns: see part 1c
+"""
+
 def geom_brownian(N, mu, sigma, seed):
     """Generate a geometric Brownian path
 

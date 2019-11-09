@@ -1,6 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+""" 
+GTM: Well done!
+given points: 5
+"""
 
 def brownian(N, T, S0, seed):
     """Generate a standard brownian path
@@ -62,7 +66,7 @@ if __name__ == "__main__":
     plt.ylabel('$s$')
     plt.title('Brownian Motion & its Ito Integration and Stratonovich Integration')
     plt.legend()
-    plt.savefig('p3.pdf')
+    #plt.savefig('p3.pdf')
     plt.show()
 
     """Description

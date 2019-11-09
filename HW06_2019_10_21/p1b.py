@@ -2,6 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+"""
+GTM:
+given poitns: see part 1c
+"""
+
 def binomial_s(N, rp, sigma, S, T, seed):
     """Calculate Stock Price using Binomial Tree
 
