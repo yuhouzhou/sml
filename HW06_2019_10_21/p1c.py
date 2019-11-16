@@ -2,6 +2,20 @@ import p1a, p1b
 import numpy as np
 import matplotlib.pyplot as plt
 
+"""
+GTM: You should provide better comments.
+    Good to mention: the geometric Brownian motion is the 
+    model underlying the binomial tree Stock prices, if 
+    correctly calibrated, and for large N
+    
+    - I noticed you made some changes after deadline, you 
+    are not allowed to do that. If I cannot notice the extend of
+    changes you can loose all points. I am reporting everything.
+    Here, I wrote you grade but I will report this as well.
+    
+given poitns: 10
+"""
+
 if __name__ == '__main__':
     N = 500
     n_path = 1000
