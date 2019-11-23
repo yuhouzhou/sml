@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{mathtools} 
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+    \section*{Problem 1a Answer}
+    \begin{equation*}
+        \begin{aligned}
+            \begin{pmatrix}[ccccc|c]
+                b_1 & c_1 &  & \dots & 0 & d_1\\ 
+                a_1 & b_2 & c_2 & & \vdots & d_2\\
+                & a_2 & b3 & \ddots & & d_3\\
+                \vdots & & \ddots & \ddots & c_{n-1} & \vdots\\
+                0 & \dots & & a_{n-1} & b_n & d_n\\
+            \end{pmatrix}
+            &=
+            \begin{pmatrix}[ccccc|c]
+                1 & \cfrac{c_{1}}{b_1} &  & \dots & 0 & \cfrac{d_{1}}{b_1}\\  
+                0 & b_2 - a_{1}\cfrac{c_{1}}{b_1} & c_2 & & \vdots & \cfrac{d_2 - a_{1}\cfrac{d_{1}}{b_1}}{b_2 - a_{1}\cfrac{c_{1}}{b_1}}\\
+                & a_2 & b_3 & \ddots & & d_3\\
+                \vdots & & \ddots & \ddots & c_{n-1} & \vdots\\
+                0 & \dots & & a_{n-1} & b_n & d_n\\
+            \end{pmatrix}\\
+            % &=
+            % \begin{pmatrix}[ccccc|c]
+            %     b_1 & c_1 &  & \dots & 0 & d_1\\  
+            %     0 & b_2 - a_{1}\cfrac{c_{1}}{b_1} & c_2 & & \vdots & d_2 - a_{1}\cfrac{d_{1}}{b_1}\\
+            %     & a_2 & b_3 & \ddots & & d_3\\
+            %     \vdots & & \ddots & \ddots & c_{n-1} & \vdots\\
+            %     0 & \dots & & a_{n-1} & b_n & d_n\\
+            % \end{pmatrix}\\
+            % &=
+            % \begin{pmatrix}[ccccc|c]
+            %     1 & \cfrac{c_{1}}{b_1} &  & \dots & 0 & \cfrac{a_{1}}{b_1}\\
+            %     0 & b_2 - a_{1}\cfrac{c_{1}}{b_1} & c_2 & & \vdots & d_2 - a_{1}\cfrac{d_{1}}{b_1}\\
+            %     & 0 & b_3 - c_{2}\cfrac{a_{2}}{b_2 - a_{1}\cfrac{c_{1}}{b_1}}& \ddots & & d_3 - \cfrac{(d_2 - a_{1}\cfrac{d_{1}}{b_1})a_{2}}{b_2 - a_{1}\cfrac{c_{1}}{b_1}}\\
+            %     \vdots & & \ddots & \ddots & c_{n-1} & \vdots\\
+            %     0 & \dots & & a_{n-1} & b_n & d_n\\
+            % \end{pmatrix}\\
+            &=
+            \begin{pmatrix}[ccccc|c]
+                1 & \cfrac{c_{1}}{b_1} &  & \dots & 0 & \cfrac{d_{1}}{b_1}\\
+                0 & 1 & a_{2}\cfrac{c_{2}}{b_2 - a_{1}\cfrac{c_{1}}{b_1}} & & \vdots & \cfrac{d_2 - a_{1}\cfrac{d_{1}}{b_1}}{b_2 - a_{1}\cfrac{c_{1}}{b_1}}\\
+                & 0 & b_3 - a_{2}\cfrac{c_{2}}{b_2 - a_{1}\cfrac{c_{1}}{b_1}}& \ddots & & d_3 - a_{2}\cfrac{d_2 - a_{1}\cfrac{d_{1}}{b_1}}{b_2 - a_{1}\cfrac{c_{1}}{b_1}}\\
+                \vdots & & \ddots & \ddots & c_{n-1} & \vdots\\
+                0 & \dots & & a_{n-1} & b_n & d_n\\
+            \end{pmatrix}\\
+        \end{aligned}
+    \end{equation*}
+    we can use use $n-1$ steps to eliminate all $a_i$. In the main diagonal, divide the row by the value of its pivot in $n$ steps. and then we can back substitute $n-1$ steps. After these $3n-2$ steps, the matrix gives the solution. Thus,
+    \[
+    c_{i}^{\prime}= 
+    \begin{cases}
+        \cfrac{c_{i}}{b_{i}} & i=1\\
+        \cfrac{c_{i}}{b_{i}-a_{i}c_{i-1}^{\prime}}              & i=2,3,\dots,n-1
+    \end{cases}
+    \]\\
+    and
+    \[
+    d_{i}^{\prime}= 
+    \begin{cases}
+        \cfrac{d_{i}}{b_{i}} & i=1\\
+        \cfrac{d_{i}-a_{i}d_{i-1}^{\prime}}{b_{i}-a_{i}c_{i-1}^{\prime}} & i=2,3,\dots,n
+    \end{cases}
+    \]\\
+    then
+    \[
+    x_{i}= 
+    \begin{cases}
+        d_{i}^{\prime} & i=n\\
+        d_{i}^{\prime}-c_{i}^{\prime}x_{x+1} & i=n-1,n-2,\dots,1
+    \end{cases} 
+    \]
+\end{document}
