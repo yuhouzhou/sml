@@ -186,4 +186,4 @@ if __name__ == '__main__':
     plt.ylabel('$log(error)$')
     plt.legend()
     plt.show()
-    print('Order of convergence of the implicit method = {}'.format(slope))
+    print('Rate of convergence of the implicit method = {}'.format(slope))
