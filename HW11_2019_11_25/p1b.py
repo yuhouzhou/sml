@@ -34,9 +34,10 @@ if __name__ == '__main__':
     plt.loglog(2 ** np.arange(k + 1), sigma_std, 'o', label='$\hat{\sigma}$ std')
     plt.loglog(2 ** np.arange(k + 1), mu_std, 'v', label='$\hat{\mu}$ std')
     plt.loglog(2 ** np.arange(k + 1), sigma_var_sqrt, 'D', label='$\hat{\sigma}$ std (formula)')
+    plt.xlabel('$N$')
     plt.title('$\hat{\sigma}\ &\ \hat{\mu}$')
     plt.legend(loc=3)
-    # plt.savefig('p1b.pdf')
+    plt.savefig('p1b.pdf')
     plt.show()
 
     """

@@ -12,7 +12,8 @@ if __name__ == '__main__':
     seed = 5
     gbm0 = geom_brownian(N=N + 1, mu=mu, sigma=sigma, seed=seed)
     g_noise = np.sqrt(dt) * np.random.normal(0, 1, N + 1)
-    p_noise = np.sqrt(dt) * np.sin(2 * np.pi * 10e6 * np.arange(N + 1))
+    f = 0.3
+    p_noise = np.sqrt(dt) * np.sin(2 * np.pi * f * np.arange(N + 1))
 
     plt.rc('figure', figsize=(14, 10))
 
@@ -45,9 +46,7 @@ if __name__ == '__main__':
     plt.show()
 
     """
-    Sigma and Mu in GBM with Gaussian noise do not converge to the correct value; 
+    Sigma and Mu in GBM with Gaussian noise and a periodic noise do not converge to the correct value; 
         When N gets larger, the values of them increase.
-    Sigma in GBM with high frequency periodic perturbation converges to the correct value; mu does not.
-        they behave the same as no noise added.
     """
 

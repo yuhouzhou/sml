@@ -9,7 +9,10 @@ def sigma_mu_est(k, gbm, N):
     s_coarse = gbm[::step]
     r_arr = np.diff(np.log(s_coarse))
     r_mean = np.mean(r_arr)
-    sigma_r = np.std(r_arr)
+    if len(r_arr) > 1:
+        sigma_r = np.std(r_arr, ddof=1)
+    else:
+        sigma_r = 0
     sigma_est = sigma_r / np.sqrt(dt)
     mu_est = r_mean / dt + sigma_est ** 2 / 2
     return sigma_est, mu_est

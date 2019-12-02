@@ -12,29 +12,31 @@ if __name__ == '__main__':
     seed = 5
     gbm0 = geom_brownian(N=N + 1, mu=mu, sigma=sigma, seed=seed)
     g_noise = np.sqrt(dt) * np.random.normal(0, 1, N + 1)
-    p_noise = np.sqrt(dt) * np.sin(2 * np.pi * 20e6 * np.arange(N + 1))
+    f = 0.3
+    p_noise = np.sqrt(dt) * np.sin(2 * np.pi * f * np.arange(N + 1))
     gbm1 = gbm0 + g_noise
     gbm2 = gbm0 + p_noise
 
     # plt.subplot(311)
-    # plt.acorr(np.log(gbm0), maxlags=N)
+    # plt.acorr(np.diff(np.log(gbm0)))
     # plt.subplot(312)
-    # plt.acorr(np.log(gbm1), maxlags=N)
+    # plt.acorr(np.diff(np.log(gbm1)))
     # plt.subplot(313)
-    # plt.acorr(np.log(gbm2), maxlags=N)
+    # plt.acorr(np.diff(np.log(gbm2)))
     # plt.show()
 
     ax0 = plt.subplot(311)
-    plot_acf(np.log(gbm0), ax=ax0, lags = N)
+    plot_acf(np.diff(np.log(gbm0)), ax=ax0)
     ax1 = plt.subplot(312)
-    plot_acf(np.log(gbm1), ax=ax1, lags = N)
+    plot_acf(np.diff(np.log(gbm1)), ax=ax1)
     ax2 = plt.subplot(313)
-    plot_acf(np.log(gbm2), ax=ax2, lags = N)
+    plot_acf(np.diff(np.log(gbm2)), ax=ax2)
     plt.tight_layout()
     # plt.savefig('p1f.pdf')
     plt.show()
 
     """
-    No matter with noise or not, the autocorrelation graph shows when dt is small, 
-    there is autocorrelation between nearby r_i, so increase dt to get more reliable estimate sigma.
+    The log return of GBM without noise is not auto-correlated;
+    The log return of GBM with Gaussian noise is not auto-correlated when lags > 1, if lags = 1, it shows a slight auto-correlation;
+    The log return of GBM with a high frequency perturbation noise is auto-correlated, showing a periodic pattern.
     """
