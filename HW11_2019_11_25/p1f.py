@@ -17,7 +17,7 @@ if __name__ == '__main__':
     gbm2 = gbm0 + p_noise
 
     # plt.subplot(311)
-    # plt.acorr(np.log(gbm0), usevlines=True, normed=True, maxlags=N, lw=2)
+    # plt.acorr(np.log(gbm0), maxlags=N)
     # plt.subplot(312)
     # plt.acorr(np.log(gbm1), maxlags=N)
     # plt.subplot(313)
@@ -30,6 +30,7 @@ if __name__ == '__main__':
     plot_acf(np.log(gbm1), ax=ax1, lags = N)
     ax2 = plt.subplot(313)
     plot_acf(np.log(gbm2), ax=ax2, lags = N)
+    plt.tight_layout()
     # plt.savefig('p1f.pdf')
     plt.show()
 
