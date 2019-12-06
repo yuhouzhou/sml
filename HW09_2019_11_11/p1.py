@@ -1,8 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
+#from HW06_2019_10_21.p1a import geom_brownian, _draw_subplot
+"""GTM: This path does not work,"""
+import sys, os
+sys.path.append('../')
 from HW06_2019_10_21.p1a import geom_brownian, _draw_subplot
 
+"""
+GTM: unnecessary for loop... -0.5
+     parameters are not good enough to make comparison
+     when c->1...-0.5
+given points: 2.5
+"""
 
+"""GTM: reason for unnecessary for loops...you can rewrite your 
+function in scuh a way that it can work for dW of (M,N)."""
 def ornstein_uhlenbeck(N, T, X0, c, mu, sigma, seed):
     np.random.seed(seed)
     dt = T / N
@@ -20,11 +32,15 @@ if __name__ == '__main__':
     c_lst = [0, 1]
     mu = 0.8
     sigma = 0.2
+    """GTM: try with the following parameters"""
+    #mu = 3.0
+    #sigma = 0.2
     seeds = range(50)
     steps = np.linspace(0, T, N)
 
     plt.rc('figure', figsize=(14, 10))
     for c in c_lst:
+        """GTM: unnecessary for loop """
         Xt_lst0 = [ornstein_uhlenbeck(N=N, T=T, X0=X0, c=c, mu=mu, sigma=sigma, seed=seed) for seed in seeds]
         mean_lst0 = np.mean(Xt_lst0, axis=0)
         std_lst0 = np.std(Xt_lst0, axis=0)
@@ -32,6 +48,7 @@ if __name__ == '__main__':
         _draw_subplot(Xt_lst0, mean_lst0, std_lst0, steps, mu, sigma)
         plt.title('Ensemble of Exponential Ornstein Uhlenbeck Path, with $\mu={}, \sigma={}, c={}$'.format(mu, sigma, c))
 
+        """GTM: unnecessary for loop """
         Xt_lst1 = [geom_brownian(N=N, mu=mu, sigma=sigma, seed=seed) for seed in seeds]
         mean_lst1 = np.mean(Xt_lst1, axis=0)
         std_lst1 = np.std(Xt_lst1, axis=0)
