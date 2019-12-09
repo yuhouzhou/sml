@@ -4,6 +4,21 @@ from scipy.stats import norm
 from scipy.linalg import solve_banded
 from scipy import stats
 
+"""
+GTM: Congrats! You got the highest point for this problem.
+     Each part is 3 points.
+     part a) task: explicit Euler + boundary condition. (+3)
+          well done...
+     part b) task: explicit scheme being unstable for large Dt (+2.5)
+          well done... 
+          for using loglog plot... -0.5
+     part c) task: implicit Euler + stability for large Dt (+3)
+          well done...
+     part d) task: convergence of implicit schemme when M=N (+1)
+          wrong loglog plot... -2
+given points:  9.5
+"""
+
 
 def black_scholes(rp, sigma, X, T, S):
     x = (np.log(S / X) + (rp + sigma ** 2 / 2) * T) / (sigma * T ** (1 / 2))
@@ -38,6 +53,7 @@ def black_scholes_e(x_max, M, N, sigma, r, S0, K):
     In our case, the key boundary condition is f = max(S - K, 0) when t = T.
     """
 
+    """GTM: well written BCs"""
     # boundary condition when stock price equals maximum of stock price
     V_m_N = (S_max - K) * np.ones(M)
     # boundary condition when stock price equals zero
@@ -133,6 +149,7 @@ err_vectorized = np.vectorize(err)
 
 if __name__ == '__main__':
     x_max = 8
+    """GTM: have a wider M array for better observation in the plots"""
     M = np.arange(1, 100, 2)
     delta_t = 1 / M
     N = 400
@@ -144,8 +161,10 @@ if __name__ == '__main__':
     explicit_error = err_vectorized(x_max, M, N, sigma, r, S0, K, black_scholes_e)
     implicit_error = err_vectorized(x_max, M, N, sigma, r, S0, K, black_scholes_i)
 
+    """GTM: for stability check no need to use loglog plot."""
     fig = plt.figure()
-    plt.loglog(delta_t[::-1], explicit_error[::-1], '*', label='Explicit error')
+    #plt.loglog(delta_t[::-1], explicit_error[::-1], '*', label='Explicit error')
+    plt.plot(delta_t[::-1], explicit_error[::-1], '*', label='Explicit error')
     plt.title('Error vs. $\Delta t$')
     plt.xlabel('$\Delta t$')
     plt.ylabel('$error$')
@@ -153,8 +172,10 @@ if __name__ == '__main__':
     plt.show()
     print('Method stability depending on dx is Visible')
 
-    plt.loglog(delta_t[::-1], explicit_error[::-1], '*', label='Explicit error')
-    plt.loglog(delta_t[::-1], implicit_error[::-1], '*', label='Implicit error')
+    #plt.loglog(delta_t[::-1], explicit_error[::-1], '*', label='Explicit error')
+    #plt.loglog(delta_t[::-1], implicit_error[::-1], '*', label='Implicit error')
+    plt.plot(delta_t[::-1], explicit_error[::-1], '*', label='Explicit error')
+    plt.plot(delta_t[::-1], implicit_error[::-1], '*', label='Implicit error')
     plt.title('Error vs. $\Delta t$')
     plt.xlabel('$\Delta t$')
     plt.ylabel('$error$')
@@ -168,9 +189,9 @@ if __name__ == '__main__':
     plt.legend()
     plt.show()
 
-    M = np.array(1.7 ** np.arange(3, 20), dtype=int)
+    M = np.array(1.7 ** np.arange(3, 15), dtype=int)
     dt = 1 / M
-    N = np.array(1.7 ** np.arange(3, 20) - 1, dtype=int)
+    N = np.array(1.7 ** np.arange(3, 15) - 1, dtype=int)
     error_convergence_implicit = []
 
     for i in range(len(M)):
@@ -179,6 +200,8 @@ if __name__ == '__main__':
 
     slope, intercept, r_value, p_value, std_err = stats.linregress(np.log(dt), np.log(error_convergence_implicit))
 
+    """GTM: still plotting loglog plot wrong? Check earlier assignments and corrections
+    to see the right way"""
     plt.plot(np.log(dt), np.log(error_convergence_implicit), '*', label='log Error')
     plt.plot(np.log(dt), np.log(dt) * slope + intercept, label='Slope equals ' + str(round(slope, 2)))
     plt.title('Order of Convergence')
