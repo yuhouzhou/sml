@@ -3,6 +3,12 @@ from scipy.linalg import solve_banded
 from scipy.sparse import diags
 import timeit
 
+"""
+GTM: Since n is small, you are not able to make
+     good comparison of computing times... -1
+given points: 5
+"""
+
 def solve_tridiagonal(ab, b):
     """solve a tri-diagonal matrix
 
