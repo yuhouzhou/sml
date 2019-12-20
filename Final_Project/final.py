@@ -7,7 +7,6 @@ from scipy.stats import norm
 from statsmodels.graphics.tsaplots import plot_acf
 from scipy.stats import kurtosistest
 import re
-from dateutil.relativedelta import relativedelta
 
 
 def j2x(j):
@@ -48,7 +47,6 @@ def black_scholes(r, sigma, S, K, T):
 
 
 black_scholes_v = np.vectorize(black_scholes)
-black_scholes_vv = np.vectorize(black_scholes_v, excluded=['T'], otypes=[list])
 
 if __name__ == '__main__':
     # TSLA is non-dividend paying, which means its American call option is actually equal European call option.
@@ -90,11 +88,12 @@ if __name__ == '__main__':
     # Q-Q plot
     plt.plot(n_sample, n_sample, label='Diagonal')
     plt.scatter(n_sample, gbm_sample, s=5, label=name + ' stock price')
-    plt.title('Q-Q Plot')
+    # plt.title('Q-Q Plot')
     plt.xlabel('scaled normal distribution')
     plt.ylabel('scaled log-returns')
     plt.legend()
     plt.grid(linestyle='--')
+    plt.savefig('qq.pdf')
     plt.show()
 
     # Kurtosis
@@ -121,11 +120,12 @@ if __name__ == '__main__':
 
     # autocorrelation
     plot_acf(r_arr)
+    # plt.savefig('autocor.pdf')
     plt.show()
 
     """
 
-    The autocorrelation plot suggest that the history of stock price is not auto-correlated.
+    The autocorrelation plot suggests that the history of stock price is not auto-correlated.
 
     """
 
@@ -134,13 +134,14 @@ if __name__ == '__main__':
     r_mean = np.mean(r_arr)
     sigma_r = np.std(r_arr, ddof=1)
     sigma_est = sigma_r / np.sqrt(dt)
+    # estimated volatility 0.8374043940233891 for December 17 2019 TSLA
     print("estimated volatility", sigma_est)
-
 
     """B
     
-    For EU investors, the risk free interest rate is -0.5% on December 17 2019 by ECB
-    For US investors, the risk free interest rate is 1.53% on December 17 2019 by 3 Month US Treasury Bill Rate
+    For EU investors, the risk free interest rate is -0.5% on December 17 2019 by ECB.
+    For US investors, the risk free interest rate is 1.53% on December 17 2019 by 3 Month US Treasury Bill Rate.
+    Since our data set is using USD as currency, I chose US Treasury Bill Rate as risk-free interest rate.
     
     """
     r = 0.0153
@@ -150,9 +151,9 @@ if __name__ == '__main__':
     """
     # read all option data
     (_, _, files) = next(os.walk('./data/' + today + '-' + name))
-    option_files = [f for f in files if 'callop' in f]
+    option_files = [f for f in files if 'callop' in f and '.pkl' in f]
     Ts = [(datetime.strptime(re.search(r'\d{4}-\d{2}-\d{2}', file_name).group(), '%Y-%m-%d').date() -
-          datetime.strptime(today, '%Y-%m-%d').date()).days / 365.25
+           datetime.strptime(today, '%Y-%m-%d').date()).days / 365
           for file_name in option_files]
 
     # pricing
@@ -167,10 +168,36 @@ if __name__ == '__main__':
     df_price.columns = ['strike', 'price', 'quote', 'maturity']
     df_price.set_index(['maturity', 'strike'], inplace=True)
     df_price.sort_index(inplace=True)
-    df_price.unstack(level=0).plot(kind='scatter', x='price', y='quote', subplots=True, figsize=(8, 4))
     plt.show()
 
-    # print(df_price)
+    if not FOR_FINAL:
+        # pip install xlsxwriter, or conda install xlsxwriter
+        writer = pd.ExcelWriter('pricing_result.xlsx', engine='xlsxwriter')
+        df_price.to_excel(writer, sheet_name='price')
+        writer.save()
+
+    if FOR_FINAL:
+        plt.rc('figure', figsize=(20, 16))
+        for i, (index, new_df) in enumerate(df_price.groupby(level=0)):
+            plt.subplot(5, 4, i + 1)
+            plt.scatter(x=new_df.index.get_level_values(1), y=new_df.price, s=4, label='price by Black-Scholes')
+            plt.scatter(x=new_df.index.get_level_values(1), y=new_df.quote, s=4, label='quote')
+            plt.xlabel("strike price")
+            plt.ylabel("value")
+            plt.title("$T = {}$".format(new_df.index.get_level_values(0)[0]))
+            plt.legend(prop={'size': 5})
+        plt.tight_layout()
+        # plt.savefig('pricing_result.pdf')
+        plt.show()
+
+    """
+    
+    From the visualization, we can see that when time of maturity is close, the option price derived from Black-Scholes
+    model is very similar to the quotes, but when time to maturity gets longer the difference between them becomes more obvious.
+    Overall, price from Black-Scholes is higher than quotes. When strike price is relatively low, the gap between them
+    is smaller than when strike price is relatively high.
+    
+    """
 
     """D
     

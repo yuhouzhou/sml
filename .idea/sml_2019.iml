@@ -8,7 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/HW06_2019_10_21" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Final_Project" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.7" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.7 (stochastic_method)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="R User Library" level="project" />
     <orderEntry type="library" name="R Skeletons" level="application" />
@@ -17,6 +17,7 @@
     <option name="requirementsPath" value="" />
   </component>
   <component name="PyDocumentationSettings">
+    <option name="format" value="GOOGLE" />
     <option name="myDocStringFormat" value="Google" />
     <option name="renderExternalDocumentation" value="true" />
   </component>

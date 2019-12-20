@@ -20,6 +20,7 @@ def generate_data(name, day, stock_period):
     for date in ticker.options:
         opt = ticker.option_chain(date=date)
         opt.calls.to_pickle(outdir + 'callop-' + date + '.pkl')
+        opt.calls.to_csv(outdir + 'callop-' + date + '.csv')
 
 
 if __name__ == '__main__':
