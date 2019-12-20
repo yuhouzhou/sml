@@ -167,8 +167,10 @@ if __name__ == '__main__':
     df_price.columns = ['strike', 'price', 'quote', 'maturity']
     df_price.set_index(['maturity', 'strike'], inplace=True)
     df_price.sort_index(inplace=True)
+    df_price.unstack(level=0).plot(kind='scatter', x='price', y='quote', subplots=True, figsize=(8, 4))
+    plt.show()
 
-    print(df_price)
+    # print(df_price)
 
     """D
     
