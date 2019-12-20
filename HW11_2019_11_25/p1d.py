@@ -1,7 +1,19 @@
-from HW06_2019_10_21.p1a import geom_brownian
-from HW11_2019_11_25.p1a import sme_v
+#from HW06_2019_10_21.p1a import geom_brownian
+#from HW11_2019_11_25.p1a import sme_v
+from p1a import sme_v
+"""GTM: not having precise path definition"""
+import sys
+sys.path.append('../')
+from HW06_2019_10_21.p1a import geom_brownian 
 import numpy as np
 import matplotlib.pyplot as plt
+
+"""
+GTM: Problem 1)
+     part d)Task: changes in (a) with (1) Gaussian noise, (2) high freq. periodic  (+2)
+                  part.
+         well done... 
+"""     
 
 if __name__ == '__main__':
     k = 10
@@ -13,9 +25,14 @@ if __name__ == '__main__':
     gbm0 = geom_brownian(N=N + 1, mu=mu, sigma=sigma, seed=seed)
     g_noise = np.sqrt(dt) * np.random.normal(0, 1, N + 1)
     f = 0.3
-    p_noise = np.sqrt(dt) * np.sin(2 * np.pi * f * np.arange(N + 1))
+    #p_noise = np.sqrt(dt) * np.sin(2 * np.pi * f * np.arange(N + 1))
+    p_noise = np.sqrt(dt) * np.sin(0.02 * np.pi * np.arange(N + 1))
+    """plt.plot(g_noise)
+    plt.show()
+    exit()"""
 
-    plt.rc('figure', figsize=(14, 10))
+    #plt.rc('figure', figsize=(14, 10))
+    plt.rc('figure', figsize=(10, 5))
 
     plt.subplot(121)
     gbm = gbm0 + g_noise

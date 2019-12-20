@@ -16,6 +16,7 @@ def generate_data(name, day, stock_period):
 
     hist = ticker.history(period=stock_period)
     hist.to_pickle(outdir + 'stock-' + day + '.pkl')
+    hist.to_csv(outdir + 'stock-' + day + '.csv')
 
     for date in ticker.options:
         opt = ticker.option_chain(date=date)

@@ -1,7 +1,17 @@
+"""GTM: not having precise path definition"""
+import sys
+sys.path.append('../')
 from HW05_2019_10_14.p3 import j2x
 from HW06_2019_10_21.p1a import geom_brownian
 import numpy as np
 import matplotlib.pyplot as plt
+
+"""
+GTM: Problem 1)           
+     part e)Task: QQ-plot vs. normal dist of log-returns, dists of two noisy log   (+2)
+                  returns in one graph, comment.
+        well done...          
+"""     
 
 if __name__ == '__main__':
     k = 10

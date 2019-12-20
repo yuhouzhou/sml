@@ -1,7 +1,18 @@
-from HW11_2019_11_25.p1a import sme_v
+#from HW11_2019_11_25.p1a import sme_v
+from p1a import sme_v
+"""GTM: not having precise path definition"""
+import sys
+sys.path.append('../')
 from HW06_2019_10_21.p1a import geom_brownian
 import numpy as np
 import matplotlib.pyplot as plt
+
+"""
+GTM: Problem 1)
+     part b)Task: geom Brown, mean and std of estimates, loglog plot, variance     (+4)
+                  for sigma_hat, comment
+            well done...
+"""     
 
 gbm_v = np.vectorize(geom_brownian, otypes=[list])
 
@@ -37,7 +48,7 @@ if __name__ == '__main__':
     plt.xlabel('$N$')
     plt.title('$\hat{\sigma}\ &\ \hat{\mu}$')
     plt.legend(loc=3)
-    plt.savefig('p1b.pdf')
+    #plt.savefig('p1b.pdf')
     plt.show()
 
     """

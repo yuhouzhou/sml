@@ -1,7 +1,25 @@
+"""GTM: not having precise path definition"""
+import sys
+sys.path.append('../')
 from HW06_2019_10_21.p1a import geom_brownian
 import numpy as np
 import matplotlib.pyplot as plt
 from statsmodels.graphics.tsaplots import plot_acf
+
+""" Last part is waiting....
+GTM: Problem 1)
+     part a) +6
+     part b) +4
+     part c) +4
+     part d) +2
+     part e) +2
+     part f)Task: autocorr. of time-series of log-returns, and two noisy version   (+2)
+                  in one plot, comment.
+        
+     Subtract overall point for not proving proper path definition.. -1
+
+given points: 19
+"""     
 
 if __name__ == '__main__':
     k = 10

@@ -88,16 +88,17 @@ if __name__ == '__main__':
     # Q-Q plot
     plt.plot(n_sample, n_sample, label='Diagonal')
     plt.scatter(n_sample, gbm_sample, s=5, label=name + ' stock price')
-    # plt.title('Q-Q Plot')
+    plt.title('Q-Q Plot')
     plt.xlabel('scaled normal distribution')
     plt.ylabel('scaled log-returns')
     plt.legend()
     plt.grid(linestyle='--')
-    plt.savefig('qq.pdf')
+    # plt.savefig('qq.pdf')
     plt.show()
 
     # Kurtosis
     print("Kurtosis:", kurtosistest(r_arr))
+
     """
     
     From the QQ plot, we see the standardized distribution of log returns of TSLA stock price history has heavy tails, 

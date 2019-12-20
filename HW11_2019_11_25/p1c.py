@@ -1,9 +1,23 @@
+#from HW06_2019_10_21.p1a import geom_brownian
+#from HW11_2019_11_25.p1a import sigma_mu_est, sme_v
+#from HW11_2019_11_25.p1b import gbm_v
+from p1a import sigma_mu_est, sme_v
+from p1b import gbm_v
+"""GTM: not having precise path definition"""
+import sys
+sys.path.append('../')
 from HW06_2019_10_21.p1a import geom_brownian
-from HW11_2019_11_25.p1a import sigma_mu_est, sme_v
-from HW11_2019_11_25.p1b import gbm_v
 import numpy as np
 import matplotlib.pyplot as plt
 
+"""
+GTM: Problem 1)
+     part c)Task: single geom Brown from (a), geom Brown as in (b), hist of        (+4)
+                  estimates with std of estimates and std of original model.
+          well done...
+"""     
+
+np.random.seed(1)
 sme_v2 = np.vectorize(sigma_mu_est)
 
 if __name__ == '__main__':

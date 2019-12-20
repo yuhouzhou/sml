@@ -1,7 +1,19 @@
+"""GTM: not having precise path definition"""
+import sys
+sys.path.append('../')
 from HW06_2019_10_21.p1a import geom_brownian
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+"""
+GTM: Problem 1)
+     part a)Task: generate geom Brow, find estimates, plot semilogx, comment       (+6)
+            well done... 
+"""     
+
+"""GTM: for reproducible data"""
+np.random.seed(1)
 
 def sigma_mu_est(k, gbm, N):
     dt = 1 / 2 ** k
